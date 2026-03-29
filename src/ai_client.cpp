@@ -14,9 +14,9 @@ String AiClient::requestSpeechToText(const int16_t *samples, size_t sampleCount)
   http.addHeader("X-Sample-Rate", String(SAMPLE_RATE_HZ));
   http.addHeader("X-Format", "pcm_s16le_mono");
 
-  const uint8_t *audioBytes = reinterpret_cast<const uint8_t *>(samples);
-  const size_t audioByteLength = sampleCount * sizeof(int16_t);
-  int code = http.POST(audioBytes, audioByteLength);
+  uint8_t *audioBytes = const_cast<uint8_t *>(reinterpret_cast<const uint8_t *>(samples));
+  size_t audioByteLength = sampleCount * sizeof(int16_t);
+  int code = http.POST((uint8_t *)audioBytes, audioByteLength);
 
   if (code <= 0) {
     Serial.printf("STT request failed: %s\n", http.errorToString(code).c_str());
