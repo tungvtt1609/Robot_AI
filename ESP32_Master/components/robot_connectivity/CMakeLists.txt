@@ -1,0 +1,31 @@
+idf_component_register(
+    SRCS
+        "robot_connectivity.c"
+        "db.c"
+        "esp_ble.c"
+        "gatt_svr.c"
+        "wifi.c"
+        "html.c"
+        "dto_build.c"
+        "dto_parse.c"
+        "ws_client.c"
+    INCLUDE_DIRS
+        "include"
+    REQUIRES
+        nvs_flash
+        bt
+        esp_wifi
+        esp_event
+        esp_netif
+        esp_http_server
+        esp_http_client
+        driver
+        lwip
+        cjson
+        esp_websocket_client
+        esp_timer
+        mbedtls
+        audio_codec_opus
+        audio_capture
+        audio_transport
+)
